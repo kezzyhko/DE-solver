@@ -62,16 +62,14 @@ class JGridGraph extends JPanel {
         // Find min and max Y
         Double maxY = null;
         Double minY = null;
-        if (!polylines.isEmpty()) {
-            for (double[] ys: polylines) {
-                Double newMax = Arrays.stream(ys).max().getAsDouble();
-                if (maxY == null || newMax > maxY) {
-                    maxY = newMax;
-                }
-                Double newMin = Arrays.stream(ys).min().getAsDouble();
-                if (minY == null || newMin < minY) {
-                    minY = newMin;
-                }
+        for (double[] ys: polylines) {
+            @SuppressWarnings("OptionalGetWithoutIsPresent") Double newMax = Arrays.stream(ys).max().getAsDouble();
+            if (maxY == null || newMax > maxY) {
+                maxY = newMax;
+            }
+            Double newMin = Arrays.stream(ys).min().getAsDouble();
+            if (minY == null || newMin < minY) {
+                minY = newMin;
             }
         }
 
@@ -130,7 +128,7 @@ class JGridGraph extends JPanel {
             for (int i = 0; i <= GRID_LINES_NUMBER; i++) {
                 int yPixel = (int)((double)graphField.height / GRID_LINES_NUMBER * i);
                 g2d.setColor(Color.BLACK);
-                String number = String.format("%."+PRECISION+"f", minY + (maxY - minY) / GRID_LINES_NUMBER * i);
+                @SuppressWarnings("ConstantConditions") String number = String.format("%."+PRECISION+"f", minY + (maxY - minY) / GRID_LINES_NUMBER * i);
                 g2d.drawString(number, graphField.x - metric.stringWidth(number) - NOTCH_SIZE - 1, graphField.y - yPixel + fontHeight/2);
             }
 
@@ -145,6 +143,7 @@ class JGridGraph extends JPanel {
                 g2d.setColor(colors.get(i));
                 g2d.fillRect(graphField.x + graphField.width + fontHeight, graphField.y - graphField.height + fontHeight * 2 * i, fontHeight, fontHeight);
                 g2d.setColor(Color.BLACK);
+                //noinspection SuspiciousNameCombination
                 g2d.drawRect(graphField.x + graphField.width + fontHeight, graphField.y - graphField.height + fontHeight * 2 * i, fontHeight, fontHeight);
                 g2d.drawString(names.get(i), graphField.x + graphField.width + fontHeight * 2 + 2, graphField.y - graphField.height + fontHeight * 2 * i + fontHeight);
             }

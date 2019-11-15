@@ -5,7 +5,6 @@ title __DEComputationalPracticum's Class Diagram__\n
   namespace com.company {
     abstract class com.company.DESolver {
         # f : DoubleBinaryOperator
-        # ys : double[]
         + DESolver()
         + solve()
         {abstract} # getNextApproximation()

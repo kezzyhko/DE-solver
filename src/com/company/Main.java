@@ -54,8 +54,8 @@ public class Main {
 	private static JButton startButton = new JButton("Solve");
 	private static List<SimpleEntry<String, JComponent>> fields = Arrays.asList(
 			new SimpleEntry<>("x0 =", x0Field),
-			new SimpleEntry<>("X =", y0Field),
-			new SimpleEntry<>("y0 =", XField),
+			new SimpleEntry<>("X =", XField),
+			new SimpleEntry<>("y0 =", y0Field),
 			new SimpleEntry<>("N =", NField)
 	);
 
